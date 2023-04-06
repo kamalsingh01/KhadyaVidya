@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block start %}
+
+
+<div class="container mt-5">
+
+    <form  class="col-6 mx-auto card p-3 shadow-lg" method="post" enctype="multipart/form-data"> 
+        <!--enctype="multipart/form-data" is for sending file/image to the backend-->
+        <!--method="post" for sending data from frontend to backend-->
+        {% csrf_token %}   <!--This as added to validate the source of front-end data, ensuring that frontend and backend are hosted under same source-->
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Recipe Name</label>
+          <input name="name" type="text" required class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Chef's Name</label>
+            <input name="chef_name" required type="text" class="form-control">
+          </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Recipe Description</label>
+          <textarea name="description" required class="form-control"></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Recipe Image</label>
+            <input name = "image" type="file" class="form-control">
+        </div>
+        <div class="card-body">
+            <h4 class="card-title">Recipe Type</h4>
+            <div >
+                <input name="recipe_type" type="radio" id="radio1" checked="true" value="veg" />
+                <label class="radio" for="radio1">Veg</label>
+                <input name="recipe_type" type="radio" id="radio2" value="non-veg"/>
+                <label for="radio2">Non-Veg</label>
+            </div>
+        </div>
+
+        <hr>
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="cancel" class="btn btn-primary">Cancel</button>
+      </form>
+
+
+</div>
+
+
+{% endblock %}
