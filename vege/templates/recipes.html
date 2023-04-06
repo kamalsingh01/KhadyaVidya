@@ -39,8 +39,49 @@
         <button type="cancel" class="btn btn-primary">Cancel</button>
       </form>
 
+    <hr>
+    <form>
+    <div class="mt-5">
+      <div class="mx-auto col-6">
+            <label for="exampleInputPassword1" class="form-label">Search Recipe:</label>
+            <input name = "search" value="{{recipes.name}}" type="text" class="form-control">
 
+            <button type="submit" class="btn btn-primary" style="color: cornflowerblue;">Submit</button>
+      </div>
+    </form>
 </div>
+
+<hr><hr>
+
+<table class="table mt-5" border="2px" >
+  <thead>
+    <tr>
+      <th scope="col">Sn.</th>
+      <th scope="col">Recipe Name</th>
+      <th scope="col">Chef Name</th>
+      <th scope="col">Recipe Description</th>
+      <th scope="col">Recipe Image</th>
+      <th scope="col">Recipe Type</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for rec in recipes%}
+    <tr>
+      <th scope="row">{{forloop.counter}}</th>
+      <td>{{rec.name}}</td>
+      <td>{{rec.chef_name}}</td>
+      <td>{{rec.description}}</td>
+      <td><img src="/media/{{rec.image}} " style="height:100px"></td>
+      <td>{{rec.recipe_type}}</td>
+      <td>
+          <a href="/delete-recipe/{{rec.id}}/" class="btnm btn-danger m-2" style="color:firebrick ">Delete</button>
+          <a href="/update-recipe/{{rec.id}}/" class="btnm btn-success " style="color:rgb(0, 149, 248) ">Update</button>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
 
 
 {% endblock %}

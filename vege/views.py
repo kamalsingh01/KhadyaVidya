@@ -23,5 +23,44 @@ def recipes(request):
             recipe_type=recipe_type)
     
         return redirect("/recipes/")
-    return render(request, 'recipes.html')
+    
+    queryset = Recipe.objects.all()
 
+    if request.GET.get('search'):
+        queryset = queryset.filter(name__icontains = request.GET.get('search')) 
+        #searches if the leyword enetered in search is found as substring in any recipe name
+
+    context = {'recipes':queryset}
+    return render(request, 'recipes.html', context)
+
+def update_recipe(request,id):
+    queryset = Recipe.objects.get(id = id)
+
+    if request.method == "POST":
+        data = request.POST
+        image = request.FILES.get('image')  #FILES for images and documents
+        name = data.get("name")
+        chef_name = data.get("chef_name")
+        description = data.get("description")
+        recipe_type = data.get("recipe_type")
+    
+        queryset.name = name
+        queryset.chef_name = chef_name
+        if image:
+            queryset.image = image
+        queryset.description = description
+        queryset.recipe_type = recipe_type
+        queryset.save()
+        context = {'recipes':queryset}
+        return redirect("/recipes/",context)
+    
+    conext = {'recipes':queryset}
+    return render(request, "update_recipe.html",conext)
+
+
+def delete_recipe(request,id):
+    print(id)
+    queryset = Recipe.objects.get(id = id)
+    queryset.delete()
+    context = {'recipes':queryset}
+    return redirect("/recipes/",context)

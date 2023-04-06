@@ -1,0 +1,11 @@
+NOTE: django media directory is used to show images on frfontend retrieved from backend.
+Media directory is set by updating static rule in settings.py, putting updated values of static root and static url setting
+STATIC ROOT is for django admin files and STATIC URL is for HTML, Javascripts and MEDIA_ROOT and MEDIA_URL is for all media files like jpeg, png, etc.
+All these 4 setting attributes need to be updated and then used for using media files in frontend
+STATICFILES_DIR is added so that all the media files get updated in the public/staic folder.
+After this we update urls.py with media(public/static) folder so that all the images present at the server are available to the App and we can access all the images using browser.
+for production based applications, mainly cdn(content delivery network) or amazon's S3 is used to store all the images and static files, we don't dump files on django server or app.
+
+DYNAMIC URLS in Django:
+
+> 
