@@ -26,8 +26,10 @@ urlpatterns = [
     path('recipes/', recipes , name = 'recipes'),
     path('delete-recipe/<id>/', delete_recipe, name="delete_recipe"),  #dynamic urls
     path('update-recipe/<id>/', update_recipe, name = "update_recipe"),
+    path('login/', login_page, name = 'login_page'),
+    path('register/', register_page, name = 'register_page'),
+    path('logout/', logout_page, name = 'logout_page')
 ]
-
 #URL definition for MEDIA root, finding media files on web browser
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,

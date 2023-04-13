@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block start %}
+
+
+<div class="container mt-5">
+
+    <form  class="col-6 mx-auto card p-3 shadow-lg" method="post" enctype="multipart/form-data"> 
+        <!--enctype="multipart/form-data" is for sending file/image to the backend-->
+        <!--method="post" for sending data from frontend to backend-->
+        {% csrf_token %}   <!--This as added to validate the source of front-end data, ensuring that frontend and backend are hosted under same source-->
+        
+        <h2> LOGIN: </h2>
+        <!--ALert Message-->
+        {% if messages %}
+        {{ message.tags }}
+        <div class="alert alert-danger" role="alert">
+            {% for message in messages %}
+            {{ message }}
+            {% endfor %}
+        </div>
+        {% endif %}
+
+
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Username</label>
+            <input type="email" required name="username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Password</label>
+            <input type="password" name="password" class="form-control" id="exampleInputPassword1">
+          </div>
+
+          <button type="submit" class="btn btn-primary">Login</button>
+          <hr>
+          New to KhadyaVidya? <a href="/register/"> Create Account</a>
+      </form>
+
+</div>
+
+
+
+{% endblock %}

@@ -1,7 +1,21 @@
 {% extends "base.html" %}
 {% block start %}
 
+<nav class="navbar bg-body-tertiary">
+  <div class="container-fluid">
+    <!--<a class="navbar-brand">KhadyaVidya</a>-->
+    <form class="d-flex" role="search">
+      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+      <a href="/logout/" class="btn btn-success" type="submit">Logout</button>
+      </a>
+    </form>
+  </div>
+</nav>
 
+
+<hr>
+<p>Hello User : <a href="/profile/" >{{request.user }} </a></p>
+<hr>
 <div class="container mt-5">
 
     <form  class="col-6 mx-auto card p-3 shadow-lg" method="post" enctype="multipart/form-data"> 
