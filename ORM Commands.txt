@@ -1,0 +1,100 @@
+>>> from vege.models import *
+>>> vege = Recipe.objects.all()
+>>> vege
+<QuerySet [<Recipe: Butter Chicken>, <Recipe: Sizzler>, <Recipe: Salad Nicoise>]>
+>>> import random
+>>> for veg in vege:
+... veg.recipe_view_count = random.randint(10,100)
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/code.py", line 63, in runsource
+    code = self.compile(source, filename, symbol)
+  File "/usr/lib/python3.10/codeop.py", line 153, in __call__
+    return _maybe_compile(self.compiler, source, filename, symbol)
+  File "/usr/lib/python3.10/codeop.py", line 70, in _maybe_compile
+    compiler(source + "\n", filename, symbol)
+  File "/usr/lib/python3.10/codeop.py", line 118, in __call__
+    codeob = compile(source, filename, symbol, self.flags, True)
+  File "<console>", line 2
+    veg.recipe_view_count = random.randint(10,100)
+    ^
+IndentationError: expected an indented block after 'for' statement on line 1
+>>> for veg in vege:
+...     veg.recipe_view_count = random.randint(10,100)
+...     veg.save()
+... 
+>>> vege = Recipe.objects.all()
+>>> vege
+<QuerySet [<Recipe: Butter Chicken>, <Recipe: Sizzler>, <Recipe: Salad Nicoise>]>
+>>> vege[0].recipe_view_count
+95
+>>> vege[1].recipe_view_count
+98
+>>> vege[2].recipe_view_count
+15
+>>> Recipe.objects.all().order_by('recipe_view_count')
+<QuerySet [<Recipe: Salad Nicoise>, <Recipe: Butter Chicken>, <Recipe: Sizzler>]>
+>>> Recipe.objects.all().order_by('-recipe_view_count')
+<QuerySet [<Recipe: Sizzler>, <Recipe: Butter Chicken>, <Recipe: Salad Nicoise>]>
+>>> Recipe.objects.filter(recipe_view_count==15)
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/code.py", line 90, in runcode
+    exec(code, self.locals)
+  File "<console>", line 1, in <module>
+NameError: name 'recipe_view_count' is not defined
+>>> Recipe.objects.filter(recipe_view_count = 15)
+<QuerySet [<Recipe: Salad Nicoise>]>
+>>> Recipe.objects.filter(recipe_view_count__gte = 15)
+<QuerySet [<Recipe: Butter Chicken>, <Recipe: Sizzler>, <Recipe: Salad Nicoise>]>
+>>> Recipe.objects.filter(recipe_view_count__lte = 50)
+<QuerySet [<Recipe: Salad Nicoise>]>
+>>> Recipe.objects.filter(recipe_view_count__lte  98)
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/code.py", line 63, in runsource
+    code = self.compile(source, filename, symbol)
+  File "/usr/lib/python3.10/codeop.py", line 153, in __call__
+    return _maybe_compile(self.compiler, source, filename, symbol)
+  File "/usr/lib/python3.10/codeop.py", line 70, in _maybe_compile
+    compiler(source + "\n", filename, symbol)
+  File "/usr/lib/python3.10/codeop.py", line 118, in __call__
+    codeob = compile(source, filename, symbol, self.flags, True)
+  File "<console>", line 1
+    Recipe.objects.filter(recipe_view_count__lte  98)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+>>> Recipe.objects.filter(recipe_view_count__lte 98)
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/code.py", line 63, in runsource
+    code = self.compile(source, filename, symbol)
+  File "/usr/lib/python3.10/codeop.py", line 153, in __call__
+    return _maybe_compile(self.compiler, source, filename, symbol)
+  File "/usr/lib/python3.10/codeop.py", line 70, in _maybe_compile
+    compiler(source + "\n", filename, symbol)
+  File "/usr/lib/python3.10/codeop.py", line 118, in __call__
+    codeob = compile(source, filename, symbol, self.flags, True)
+  File "<console>", line 1
+    Recipe.objects.filter(recipe_view_count__lte 98)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+>>> Recipe.objects.filter(recipe_view_count__lte98)
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/code.py", line 90, in runcode
+    exec(code, self.locals)
+  File "<console>", line 1, in <module>
+NameError: name 'recipe_view_count__lte98' is not defined
+>>> Recipe.objects.filter(recipe_view_count__lte,98)
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/code.py", line 90, in runcode
+    exec(code, self.locals)
+  File "<console>", line 1, in <module>
+NameError: name 'recipe_view_count__lte' is not defined
+>>> Recipe.objects.filter(recipe_view_count__lte , 98)
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/code.py", line 90, in runcode
+    exec(code, self.locals)
+  File "<console>", line 1, in <module>
+NameError: name 'recipe_view_count__lte' is not defined
+>>> Recipe.objects.filter(recipe_view_count__lte = 98)
+<QuerySet [<Recipe: Butter Chicken>, <Recipe: Sizzler>, <Recipe: Salad Nicoise>]>
+>>> Recipe.objects.filter(recipe_view_count__lte = 98)
+<QuerySet [<Recipe: Butter Chicken>, <Recipe: Sizzler>, <Recipe: Salad Nicoise>]>
+>>> 

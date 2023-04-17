@@ -12,6 +12,7 @@ class Recipe(models.Model):
         ('veg','veg'),
         ('nonveg','non-veg')
     ]   )
+    recipe_view_count = models.IntegerField(default=0)
 
     def __str__(self) -> str:
         return self.name
